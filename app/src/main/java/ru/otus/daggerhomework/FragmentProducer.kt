@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.flow.MutableStateFlow
 import ru.otus.daggerhomework.di.DaggerFragmentProducerComponent
 import javax.inject.Inject
 
@@ -14,6 +15,9 @@ class FragmentProducer : Fragment() {
 
     @Inject
     lateinit var appContext: Context
+
+    @Inject
+    lateinit var eventFlow: MutableStateFlow<String>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -26,7 +30,7 @@ class FragmentProducer : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_a, container, true)
+        return inflater.inflate(R.layout.fragment_a, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
