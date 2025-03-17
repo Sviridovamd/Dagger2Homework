@@ -1,9 +1,7 @@
 package ru.otus.daggerhomework
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import ru.otus.daggerhomework.di.DaggerMainActivityComponent
 import ru.otus.daggerhomework.di.MainActivityComponent
 import javax.inject.Inject
 

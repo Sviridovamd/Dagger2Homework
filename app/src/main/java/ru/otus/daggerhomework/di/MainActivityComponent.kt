@@ -1,22 +1,22 @@
 package ru.otus.daggerhomework.di
 
 import android.app.Activity
+import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import ru.otus.daggerhomework.EventObserver
-import ru.otus.daggerhomework.MainActivity
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [MainActivityModule::class])
+@Component(modules = [ViewModelModule::class, MainActivityModule::class, ColorGeneratorModule::class])
 interface MainActivityComponent {
 
-    fun inject(activity: MainActivity)
-
-    fun eventObserver(): EventObserver
+    fun producerFragmentComponent(): ProducerFragmentComponent.Factory
+    fun receiverFragmentComponent(): ReceiverFragmentComponent.Factory
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance activityContext: Activity): MainActivityComponent
+        fun create(
+            @BindsInstance context: Context
+        ): MainActivityComponent
     }
 }

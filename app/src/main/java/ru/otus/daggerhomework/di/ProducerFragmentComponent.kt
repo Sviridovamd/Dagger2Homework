@@ -7,11 +7,10 @@ import ru.otus.daggerhomework.ProducerFragment
 
 @Subcomponent
 interface ProducerFragmentComponent {
-
     fun inject(fragment: ProducerFragment)
 
     @Subcomponent.Factory
     interface Factory {
-        fun create(@BindsInstance fragmentContext: Context): ProducerFragmentComponent
+        fun create(@BindsInstance fragment: ProducerFragment): ProducerFragmentComponent
     }
 }
