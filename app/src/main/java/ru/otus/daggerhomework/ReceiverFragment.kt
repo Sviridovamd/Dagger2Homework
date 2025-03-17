@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class ReceiverFragment : Fragment() {
 
     private lateinit var frame: View
+
+    private val eventObserver: EventObserver by lazy {
+        (requireActivity() as MainActivity).mainActivityComponent.eventObserver()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +28,13 @@ class ReceiverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         frame = view.findViewById(R.id.frame)
+        lifecycleScope.launch {
+            eventObserver.events.collect { event ->
+                if (event is Event.ChangeColor) {
+                    view.setBackgroundColor(event.color)
+                }
+            }
+        }
     }
 
     fun populateColor(@ColorInt color: Int) {
